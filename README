@@ -1,0 +1,31 @@
+Sherlocked v3. by elfmaster@zoho.com 2014 from Bitlackeys
+
+About:
+Sherlocked is a protector for scripts of any type. It uses a simple xor cipher
+with a provided key. Unless '-r' option is used, the key is stored (encrypted)
+within the binary and the binary will run without the user providing the key.
+Sherlocked takes your script, encrypts it, and stores it in an output ELF x86_64
+executable file. The ELF executable at runtime will decrypt the script and
+temporarily write it to a random file in /tmp. It passes the script and cmdline
+args to the interpreter, and then deletes the script. 
+
+NOTE: Protected files that are also locked with a password (e.g. -r) won't accept
+cmdline args. In other words you can't password protect your script and expect it
+to take cmdline args. This is a temporary restriction due to my lazy programming
+since there is no quick way to seperate the command line args from the password
+you would have to give on the command line. If you don't like this, then implement
+it yourself :)
+
+Compile:
+make
+
+Usage:
+./sherlocked <infile> <outfile> <key> <interpreter> [-r]
+
+Options:
+<infile> 	<-> The script file
+<outfile> 	<-> The protected output file
+<key>		<-> The key string used to encrypt the script
+[-r] 		<-> Require the user who runs the protected executable supplies the key for it to run I.E ./script.elf <key>
+
+
